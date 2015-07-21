@@ -1,0 +1,48 @@
+import ply.lex as lex
+
+tokens = ('MY_FRIENDS',
+			'FRIENDS',
+			'MY_FOLLOWERS',
+			'FOLLOWERS',
+			'AND',
+			'OR',
+			'OF',
+			'WHO',
+			'FOLLOW',
+			'LIVING_IN',
+			'HAVING_FOLLOWER_GREATER_THAN',
+			'HAVING_FOLLOWER_LESS_THAN',
+			'NUMBER'
+		)
+
+t_FRIENDS = r'(friends \s|Friends \s)'
+t_MY_FRIENDS = r'(My \s Friends \s|My \s friends \s|my \s friends \s|my \s Friends \s)'
+t_FOLLOWERS = r'(Followers \s|followers \s)'
+t_MY_FOLLOWERS = r'(My \s Followers \s|My \s followers \s|my \s followers \s|my \s Followers \s)'
+t_AND = r'(\s and \s | and \s)'
+t_OR = r'(\s or \s | or \s)'
+t_OF = r'(of \s | \s of \s)'
+t_WHO = r'(who \s | \s who \s )'
+t_FOLLOW = r'(\s follow \s | follow \s)'
+t_LIVING_IN = r'(living \s in \s ([a-zA-Z]+)|living \s in \s ([a-zA-Z]+) \s)'
+t_HAVING_FOLLOWER_GREATER_THAN = r'(having \s followers \s greater \s than \s | \s having \s followers \s greater \s than \s)'
+t_HAVING_FOLLOWER_LESS_THAN = r'(having \s followers \s less \s than \s | \s having \s followers \s less \s than \s)'
+
+
+def t_NUMBER(t):
+	r'\d+'
+	t.value = int(t.value)
+	return t
+
+def t_error(t):
+    print "Illegal character '%s'" % t.value[0]
+    t.lexer.skip(1)
+
+lexer = lex.lex()
+
+
+data = '''my friends who follow friends living in delhi and living in bombay having followers greater than 20'''
+lexer.input(data)
+
+for tok in lexer:
+	print tok

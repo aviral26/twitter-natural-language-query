@@ -1,0 +1,659 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> F
+Rule 2     start -> follower cond
+Rule 3     F -> friend cond
+Rule 4     F -> friendsWithCond AND cond
+Rule 5     F -> friend OF friend cond
+Rule 6     friendsWithCond -> friend WHO whoFollow
+Rule 7     friend -> FRIENDS
+Rule 8     friend -> MY_FRIENDS
+Rule 9     follower -> FOLLOWERS
+Rule 10    follower -> MY_FOLLOWERS
+Rule 11    cond -> specificCond AND cond
+Rule 12    cond -> specificCond cond
+Rule 13    cond -> specificCond OR cond
+Rule 14    cond -> specificCond
+Rule 15    specificCond -> placeCond
+Rule 16    specificCond -> followCond
+Rule 17    specificCond -> whoFollow
+Rule 18    placeCond -> LIVING_IN
+Rule 19    followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER
+Rule 20    followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER
+Rule 21    whoFollow -> FOLLOW F
+Rule 22    whoFollow -> FOLLOW friend
+
+Terminals, with rules where they appear
+
+AND                  : 4 11
+FOLLOW               : 21 22
+FOLLOWERS            : 9
+FRIENDS              : 7
+HAVING_FOLLOWER_GREATER_THAN : 19
+HAVING_FOLLOWER_LESS_THAN : 20
+LIVING_IN            : 18
+MY_FOLLOWERS         : 10
+MY_FRIENDS           : 8
+NUMBER               : 19 20
+OF                   : 5
+OR                   : 13
+WHO                  : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+F                    : 1 21
+cond                 : 2 3 4 5 11 12 13
+followCond           : 16
+follower             : 2
+friend               : 3 5 5 6 22
+friendsWithCond      : 4
+placeCond            : 15
+specificCond         : 11 12 13 14
+start                : 0
+whoFollow            : 6 17
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . F
+    (2) start -> . follower cond
+    (3) F -> . friend cond
+    (4) F -> . friendsWithCond AND cond
+    (5) F -> . friend OF friend cond
+    (9) follower -> . FOLLOWERS
+    (10) follower -> . MY_FOLLOWERS
+    (7) friend -> . FRIENDS
+    (8) friend -> . MY_FRIENDS
+    (6) friendsWithCond -> . friend WHO whoFollow
+
+    FOLLOWERS       shift and go to state 5
+    MY_FOLLOWERS    shift and go to state 6
+    FRIENDS         shift and go to state 7
+    MY_FRIENDS      shift and go to state 8
+
+    F                              shift and go to state 1
+    friendsWithCond                shift and go to state 2
+    start                          shift and go to state 3
+    follower                       shift and go to state 4
+    friend                         shift and go to state 9
+
+state 1
+
+    (1) start -> F .
+
+    $end            reduce using rule 1 (start -> F .)
+
+
+state 2
+
+    (4) F -> friendsWithCond . AND cond
+
+    AND             shift and go to state 10
+
+
+state 3
+
+    (0) S' -> start .
+
+
+
+state 4
+
+    (2) start -> follower . cond
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 16
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 5
+
+    (9) follower -> FOLLOWERS .
+
+    LIVING_IN       reduce using rule 9 (follower -> FOLLOWERS .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 9 (follower -> FOLLOWERS .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 9 (follower -> FOLLOWERS .)
+    FOLLOW          reduce using rule 9 (follower -> FOLLOWERS .)
+
+
+state 6
+
+    (10) follower -> MY_FOLLOWERS .
+
+    LIVING_IN       reduce using rule 10 (follower -> MY_FOLLOWERS .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 10 (follower -> MY_FOLLOWERS .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 10 (follower -> MY_FOLLOWERS .)
+    FOLLOW          reduce using rule 10 (follower -> MY_FOLLOWERS .)
+
+
+state 7
+
+    (7) friend -> FRIENDS .
+
+    OF              reduce using rule 7 (friend -> FRIENDS .)
+    WHO             reduce using rule 7 (friend -> FRIENDS .)
+    LIVING_IN       reduce using rule 7 (friend -> FRIENDS .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 7 (friend -> FRIENDS .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 7 (friend -> FRIENDS .)
+    FOLLOW          reduce using rule 7 (friend -> FRIENDS .)
+    AND             reduce using rule 7 (friend -> FRIENDS .)
+    OR              reduce using rule 7 (friend -> FRIENDS .)
+    $end            reduce using rule 7 (friend -> FRIENDS .)
+
+
+state 8
+
+    (8) friend -> MY_FRIENDS .
+
+    OF              reduce using rule 8 (friend -> MY_FRIENDS .)
+    WHO             reduce using rule 8 (friend -> MY_FRIENDS .)
+    LIVING_IN       reduce using rule 8 (friend -> MY_FRIENDS .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 8 (friend -> MY_FRIENDS .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 8 (friend -> MY_FRIENDS .)
+    FOLLOW          reduce using rule 8 (friend -> MY_FRIENDS .)
+    AND             reduce using rule 8 (friend -> MY_FRIENDS .)
+    OR              reduce using rule 8 (friend -> MY_FRIENDS .)
+    $end            reduce using rule 8 (friend -> MY_FRIENDS .)
+
+
+state 9
+
+    (3) F -> friend . cond
+    (5) F -> friend . OF friend cond
+    (6) friendsWithCond -> friend . WHO whoFollow
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    OF              shift and go to state 20
+    WHO             shift and go to state 21
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 22
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 10
+
+    (4) F -> friendsWithCond AND . cond
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 23
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 11
+
+    (18) placeCond -> LIVING_IN .
+
+    $end            reduce using rule 18 (placeCond -> LIVING_IN .)
+    AND             reduce using rule 18 (placeCond -> LIVING_IN .)
+    OR              reduce using rule 18 (placeCond -> LIVING_IN .)
+    LIVING_IN       reduce using rule 18 (placeCond -> LIVING_IN .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 18 (placeCond -> LIVING_IN .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 18 (placeCond -> LIVING_IN .)
+    FOLLOW          reduce using rule 18 (placeCond -> LIVING_IN .)
+
+
+state 12
+
+    (11) cond -> specificCond . AND cond
+    (12) cond -> specificCond . cond
+    (13) cond -> specificCond . OR cond
+    (14) cond -> specificCond .
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for LIVING_IN resolved as shift
+  ! shift/reduce conflict for HAVING_FOLLOWER_GREATER_THAN resolved as shift
+  ! shift/reduce conflict for HAVING_FOLLOWER_LESS_THAN resolved as shift
+  ! shift/reduce conflict for FOLLOW resolved as shift
+    AND             shift and go to state 24
+    OR              shift and go to state 26
+    $end            reduce using rule 14 (cond -> specificCond .)
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+  ! AND             [ reduce using rule 14 (cond -> specificCond .) ]
+  ! OR              [ reduce using rule 14 (cond -> specificCond .) ]
+  ! LIVING_IN       [ reduce using rule 14 (cond -> specificCond .) ]
+  ! HAVING_FOLLOWER_GREATER_THAN [ reduce using rule 14 (cond -> specificCond .) ]
+  ! HAVING_FOLLOWER_LESS_THAN [ reduce using rule 14 (cond -> specificCond .) ]
+  ! FOLLOW          [ reduce using rule 14 (cond -> specificCond .) ]
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 25
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 13
+
+    (17) specificCond -> whoFollow .
+
+    $end            reduce using rule 17 (specificCond -> whoFollow .)
+    AND             reduce using rule 17 (specificCond -> whoFollow .)
+    OR              reduce using rule 17 (specificCond -> whoFollow .)
+    LIVING_IN       reduce using rule 17 (specificCond -> whoFollow .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 17 (specificCond -> whoFollow .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 17 (specificCond -> whoFollow .)
+    FOLLOW          reduce using rule 17 (specificCond -> whoFollow .)
+
+
+state 14
+
+    (16) specificCond -> followCond .
+
+    $end            reduce using rule 16 (specificCond -> followCond .)
+    AND             reduce using rule 16 (specificCond -> followCond .)
+    OR              reduce using rule 16 (specificCond -> followCond .)
+    LIVING_IN       reduce using rule 16 (specificCond -> followCond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 16 (specificCond -> followCond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 16 (specificCond -> followCond .)
+    FOLLOW          reduce using rule 16 (specificCond -> followCond .)
+
+
+state 15
+
+    (20) followCond -> HAVING_FOLLOWER_LESS_THAN . NUMBER
+
+    NUMBER          shift and go to state 27
+
+
+state 16
+
+    (2) start -> follower cond .
+
+    $end            reduce using rule 2 (start -> follower cond .)
+
+
+state 17
+
+    (21) whoFollow -> FOLLOW . F
+    (22) whoFollow -> FOLLOW . friend
+    (3) F -> . friend cond
+    (4) F -> . friendsWithCond AND cond
+    (5) F -> . friend OF friend cond
+    (7) friend -> . FRIENDS
+    (8) friend -> . MY_FRIENDS
+    (6) friendsWithCond -> . friend WHO whoFollow
+
+    FRIENDS         shift and go to state 7
+    MY_FRIENDS      shift and go to state 8
+
+    friendsWithCond                shift and go to state 2
+    friend                         shift and go to state 29
+    F                              shift and go to state 28
+
+state 18
+
+    (15) specificCond -> placeCond .
+
+    $end            reduce using rule 15 (specificCond -> placeCond .)
+    AND             reduce using rule 15 (specificCond -> placeCond .)
+    OR              reduce using rule 15 (specificCond -> placeCond .)
+    LIVING_IN       reduce using rule 15 (specificCond -> placeCond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 15 (specificCond -> placeCond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 15 (specificCond -> placeCond .)
+    FOLLOW          reduce using rule 15 (specificCond -> placeCond .)
+
+
+state 19
+
+    (19) followCond -> HAVING_FOLLOWER_GREATER_THAN . NUMBER
+
+    NUMBER          shift and go to state 30
+
+
+state 20
+
+    (5) F -> friend OF . friend cond
+    (7) friend -> . FRIENDS
+    (8) friend -> . MY_FRIENDS
+
+    FRIENDS         shift and go to state 7
+    MY_FRIENDS      shift and go to state 8
+
+    friend                         shift and go to state 31
+
+state 21
+
+    (6) friendsWithCond -> friend WHO . whoFollow
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    FOLLOW          shift and go to state 17
+
+    whoFollow                      shift and go to state 32
+
+state 22
+
+    (3) F -> friend cond .
+
+    $end            reduce using rule 3 (F -> friend cond .)
+    AND             reduce using rule 3 (F -> friend cond .)
+    OR              reduce using rule 3 (F -> friend cond .)
+    LIVING_IN       reduce using rule 3 (F -> friend cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 3 (F -> friend cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 3 (F -> friend cond .)
+    FOLLOW          reduce using rule 3 (F -> friend cond .)
+
+
+state 23
+
+    (4) F -> friendsWithCond AND cond .
+
+    $end            reduce using rule 4 (F -> friendsWithCond AND cond .)
+    AND             reduce using rule 4 (F -> friendsWithCond AND cond .)
+    OR              reduce using rule 4 (F -> friendsWithCond AND cond .)
+    LIVING_IN       reduce using rule 4 (F -> friendsWithCond AND cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 4 (F -> friendsWithCond AND cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 4 (F -> friendsWithCond AND cond .)
+    FOLLOW          reduce using rule 4 (F -> friendsWithCond AND cond .)
+
+
+state 24
+
+    (11) cond -> specificCond AND . cond
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 33
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 25
+
+    (12) cond -> specificCond cond .
+
+    $end            reduce using rule 12 (cond -> specificCond cond .)
+    AND             reduce using rule 12 (cond -> specificCond cond .)
+    OR              reduce using rule 12 (cond -> specificCond cond .)
+    LIVING_IN       reduce using rule 12 (cond -> specificCond cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 12 (cond -> specificCond cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 12 (cond -> specificCond cond .)
+    FOLLOW          reduce using rule 12 (cond -> specificCond cond .)
+
+
+state 26
+
+    (13) cond -> specificCond OR . cond
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 34
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 27
+
+    (20) followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .
+
+    AND             reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    OR              reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    LIVING_IN       reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    FOLLOW          reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+    $end            reduce using rule 20 (followCond -> HAVING_FOLLOWER_LESS_THAN NUMBER .)
+
+
+state 28
+
+    (21) whoFollow -> FOLLOW F .
+
+    $end            reduce using rule 21 (whoFollow -> FOLLOW F .)
+    AND             reduce using rule 21 (whoFollow -> FOLLOW F .)
+    OR              reduce using rule 21 (whoFollow -> FOLLOW F .)
+    LIVING_IN       reduce using rule 21 (whoFollow -> FOLLOW F .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 21 (whoFollow -> FOLLOW F .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 21 (whoFollow -> FOLLOW F .)
+    FOLLOW          reduce using rule 21 (whoFollow -> FOLLOW F .)
+
+
+state 29
+
+    (22) whoFollow -> FOLLOW friend .
+    (3) F -> friend . cond
+    (5) F -> friend . OF friend cond
+    (6) friendsWithCond -> friend . WHO whoFollow
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+  ! shift/reduce conflict for LIVING_IN resolved as shift
+  ! shift/reduce conflict for HAVING_FOLLOWER_GREATER_THAN resolved as shift
+  ! shift/reduce conflict for HAVING_FOLLOWER_LESS_THAN resolved as shift
+  ! shift/reduce conflict for FOLLOW resolved as shift
+    $end            reduce using rule 22 (whoFollow -> FOLLOW friend .)
+    AND             reduce using rule 22 (whoFollow -> FOLLOW friend .)
+    OR              reduce using rule 22 (whoFollow -> FOLLOW friend .)
+    OF              shift and go to state 20
+    WHO             shift and go to state 21
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+  ! LIVING_IN       [ reduce using rule 22 (whoFollow -> FOLLOW friend .) ]
+  ! HAVING_FOLLOWER_GREATER_THAN [ reduce using rule 22 (whoFollow -> FOLLOW friend .) ]
+  ! HAVING_FOLLOWER_LESS_THAN [ reduce using rule 22 (whoFollow -> FOLLOW friend .) ]
+  ! FOLLOW          [ reduce using rule 22 (whoFollow -> FOLLOW friend .) ]
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 22
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 30
+
+    (19) followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .
+
+    AND             reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    OR              reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    LIVING_IN       reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    FOLLOW          reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+    $end            reduce using rule 19 (followCond -> HAVING_FOLLOWER_GREATER_THAN NUMBER .)
+
+
+state 31
+
+    (5) F -> friend OF friend . cond
+    (11) cond -> . specificCond AND cond
+    (12) cond -> . specificCond cond
+    (13) cond -> . specificCond OR cond
+    (14) cond -> . specificCond
+    (15) specificCond -> . placeCond
+    (16) specificCond -> . followCond
+    (17) specificCond -> . whoFollow
+    (18) placeCond -> . LIVING_IN
+    (19) followCond -> . HAVING_FOLLOWER_GREATER_THAN NUMBER
+    (20) followCond -> . HAVING_FOLLOWER_LESS_THAN NUMBER
+    (21) whoFollow -> . FOLLOW F
+    (22) whoFollow -> . FOLLOW friend
+
+    LIVING_IN       shift and go to state 11
+    HAVING_FOLLOWER_GREATER_THAN shift and go to state 19
+    HAVING_FOLLOWER_LESS_THAN shift and go to state 15
+    FOLLOW          shift and go to state 17
+
+    specificCond                   shift and go to state 12
+    whoFollow                      shift and go to state 13
+    cond                           shift and go to state 35
+    placeCond                      shift and go to state 18
+    followCond                     shift and go to state 14
+
+state 32
+
+    (6) friendsWithCond -> friend WHO whoFollow .
+
+    AND             reduce using rule 6 (friendsWithCond -> friend WHO whoFollow .)
+
+
+state 33
+
+    (11) cond -> specificCond AND cond .
+
+    $end            reduce using rule 11 (cond -> specificCond AND cond .)
+    AND             reduce using rule 11 (cond -> specificCond AND cond .)
+    OR              reduce using rule 11 (cond -> specificCond AND cond .)
+    LIVING_IN       reduce using rule 11 (cond -> specificCond AND cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 11 (cond -> specificCond AND cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 11 (cond -> specificCond AND cond .)
+    FOLLOW          reduce using rule 11 (cond -> specificCond AND cond .)
+
+
+state 34
+
+    (13) cond -> specificCond OR cond .
+
+    $end            reduce using rule 13 (cond -> specificCond OR cond .)
+    AND             reduce using rule 13 (cond -> specificCond OR cond .)
+    OR              reduce using rule 13 (cond -> specificCond OR cond .)
+    LIVING_IN       reduce using rule 13 (cond -> specificCond OR cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 13 (cond -> specificCond OR cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 13 (cond -> specificCond OR cond .)
+    FOLLOW          reduce using rule 13 (cond -> specificCond OR cond .)
+
+
+state 35
+
+    (5) F -> friend OF friend cond .
+
+    $end            reduce using rule 5 (F -> friend OF friend cond .)
+    AND             reduce using rule 5 (F -> friend OF friend cond .)
+    OR              reduce using rule 5 (F -> friend OF friend cond .)
+    LIVING_IN       reduce using rule 5 (F -> friend OF friend cond .)
+    HAVING_FOLLOWER_GREATER_THAN reduce using rule 5 (F -> friend OF friend cond .)
+    HAVING_FOLLOWER_LESS_THAN reduce using rule 5 (F -> friend OF friend cond .)
+    FOLLOW          reduce using rule 5 (F -> friend OF friend cond .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 12 resolved as shift
+WARNING: shift/reduce conflict for OR in state 12 resolved as shift
+WARNING: shift/reduce conflict for LIVING_IN in state 12 resolved as shift
+WARNING: shift/reduce conflict for HAVING_FOLLOWER_GREATER_THAN in state 12 resolved as shift
+WARNING: shift/reduce conflict for HAVING_FOLLOWER_LESS_THAN in state 12 resolved as shift
+WARNING: shift/reduce conflict for FOLLOW in state 12 resolved as shift
+WARNING: shift/reduce conflict for LIVING_IN in state 29 resolved as shift
+WARNING: shift/reduce conflict for HAVING_FOLLOWER_GREATER_THAN in state 29 resolved as shift
+WARNING: shift/reduce conflict for HAVING_FOLLOWER_LESS_THAN in state 29 resolved as shift
+WARNING: shift/reduce conflict for FOLLOW in state 29 resolved as shift

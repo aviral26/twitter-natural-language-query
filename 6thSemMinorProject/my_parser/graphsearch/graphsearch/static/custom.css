@@ -1,0 +1,52 @@
+body {
+  padding-top: 50px;
+}
+.main {
+  text-align: center;
+  width:50%;
+}
+
+.centerFromTop {
+	padding: 150px 15px;
+}
+
+.fullWidth {
+	margin: 0 auto;
+	padding: 50px 15px;
+	width:100%;
+}
+
+.input-narrow {
+	width:80%;
+}
+
+.pad {
+	padding:20px;
+}
+
+.profile {
+	border-bottom: 1px Solid #CAD3D8;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.profile:hover {
+	text-decoration: none;
+	background-color: #eee;
+}
+.profile .img {
+	width:90px;
+	padding:5px;
+	float:left;
+	padding-top:10px;
+}
+
+.profileData {
+	text-align:left;
+	padding:5px;
+	margin-left:90px;
+}
+
+.width90{
+	width:90%;
+}

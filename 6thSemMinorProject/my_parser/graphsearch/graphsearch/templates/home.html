@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load urlFilters %}
+
+{% block content %}
+<div class="main center-block centerFromTop">
+    <h1> Twitter Graph Search </h1>
+    <br />
+    <a href="{{ 'oauth' | absoluteUrl }}" class="btn btn-inverse btn-lg btn-info">	
+    	Connect with Twitter
+    </a>
+</div>
+{% endblock %}

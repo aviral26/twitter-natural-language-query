@@ -1,0 +1,63 @@
+so i figure if have just have data about the person who has logged in, and his immediate friends, all having attributes name, location, age, workplace, sex, and hobby (?), we can only 
+run queries of the form 
+
+MATCH ( ee:Person )
+WHERE ee.Workplace="DTU" AND ee.age=20 OR etc..
+RETURN ee
+
+the user might enter queries like- "My Friends living in Delhi who study at DTU who like Soccer"
+												"My Friends living in Bombay who are girls" or "My Friends who are girls living in Bombay"
+
+the following grammar should be suitable
+
+
+Start -> "Friends" W | "My Friends"W 
+
+W -> Location | Hobby | Age | Sex | Workplace | NULL
+
+Location-> "living in "<> WL | "who are living in" <> "and" WL 
+
+WL->Hobby | Age | Sex | Workplace | NULL
+
+Hobby->"who like"<>"and "WH  (i dont know if this is possible; can we get hobbies from twitter? )
+
+WH->Age | Sex | Workplace | NULL
+
+Age-> "older than " [] WA | "younger than "[] WA | "who are "[] "years old and"WA
+
+WA->Sex | Workplace | NULL
+
+Sex->"who are " S
+
+S-> M | F
+
+M -> "boys"WS 
+
+F->"girls"WS
+
+WS-> Workplace | NULL
+
+Workplace->"who work at "<>  | "who study at" <> 
+
+<> -> letters
+
+[] -> digits
+
+
+yes?
+
+
+Start->friend | follower
+friend->"Friends" cond | "My Friends" cond 
+follower-> "Followers"cond | "My Followers"cond
+
+cond->placeCond AND cond | placeCond OR cond | placeCond 
+
+placeCond->"living in {letters}" | urlCond
+
+urlCond->urlCond AND followCond | urlCond OR followCond | "who have url {url}" | followCond
+
+followCond->followCond AND likeCond | followCond OR likeCond | "whose follow count is {letters}" | likeCond
+
+likeCond->"whose like count is {digits}"  | NULL
+

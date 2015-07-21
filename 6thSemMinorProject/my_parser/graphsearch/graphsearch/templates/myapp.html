@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load urlFilters %}
+
+{% block content %}
+<div class="main center-block fullWidth">
+	<div class='center-block width90'>
+	    <form role="form" id="queryForm" method="POST" action="javascript:void;">
+		  <div class="form-group center-block width90">
+		    <input type="text" class="form-control input-lg" id="userQuery" name="userQuery" placeholder="Your query here...">
+		  </div>
+		  <button type="submit" class="btn btn-primary" data-loading-text="Processing..." id="formbtn">Submit</button>
+		</form>
+	</div>
+	<div id='results' class='center-block width90 pad'>
+		
+
+	</div>
+</div>
+{% endblock %}
+
+
+
+{% block myjs %}
+<script>
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+$("#formbtn").click(function() {
+var formData = $($("#queryForm")).serialize();
+$("#results").html("");
+var btn = $(this);
+btn.button('loading');
+$.ajax({
+	   type: "POST",
+	   url: "../processQuery/",
+	   data: formData,
+	   headers: {"X-CSRFToken": getCookie('csrftoken')},
+	   success: function(data) {
+	   			// alert(getCookie('csrftoken'));	
+                $("#results").html(data);
+                
+		  }
+	 }).always( function() {
+	 	btn.button('reset');
+	 }).fail(function() { alert('requestFailed!');})
+});
+</script>
+{% endblock %}
